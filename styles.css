@@ -1,0 +1,15 @@
+/* Estilos para la barra de progreso */
+.progress-container {
+    width: 100%;
+    background-color: #f1f1f1;
+  }
+  
+  .progress-bar {
+    height: 30px;
+    width: 0%;
+    background-color: #EF2945;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+  }
+  

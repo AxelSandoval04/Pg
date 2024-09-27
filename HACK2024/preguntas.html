@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario sobre Tarjetas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            color: white;
+            background-color:black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: red;
+        }
+        .question-container {
+            display: none;
+            margin-top: 20px;
+        }
+        .question-container h2 {
+            font-size: 18px;
+        }
+        .option {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .option:hover {
+            background-color: #d6d7d9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cuestionario sobre Tarjetas</h1>
+        <p>¿Necesitas ayuda para seleccionar alguna? ¡Selecciona cualquier opción y juega para aprender!</p>
+        <button class="button" onclick="startQuiz('credito')">Tarjeta de Crédito</button>
+        <button class="button" onclick="startQuiz('debito')">Tarjeta de Débito</button>
+        
+        <div id="questionContainer" class="question-container">
+            <h2 id="questionText"></h2>
+            <div id="optionsContainer"></div>
+        </div>
+    </div>
+
+    <!-- Confetti JS -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        const quizzes = {
+            credito: [
+                { question: "¿Qué es el Costo Anual Total (CAT) de una tarjeta de crédito?", options: ["Es el monto que pagas por cada compra con la tarjeta.", "Es una medida que incluye la tasa de interés y los costos adicionales.", "Es el límite máximo de crédito que puedes obtener."], answer: "Es una medida que incluye la tasa de interés y los costos adicionales." },
+                { question: "¿Qué significa “período de gracia” en una tarjeta de crédito?", options: ["El tiempo adicional que tienes para pagar tu factura sin cargos por intereses.", "El tiempo que tienes para usar la tarjeta sin que se aplique un límite de gasto.", "La fecha en la que se reinicia tu límite de crédito."], answer: "El tiempo adicional que tienes para pagar tu factura sin cargos por intereses." },
+                { question: "¿Qué sucede si solo pagas el mínimo en tu tarjeta de crédito?", options: ["Tu deuda se acumula con intereses más altos.", "Se cancela el saldo restante.", "Recibes un descuento por pronto pago."], answer: "Tu deuda se acumula con intereses más altos." },
+                { question: "¿Qué es la tasa de interés de una tarjeta de crédito?", options: ["El porcentaje que se te cobra por usar crédito.", "La cantidad fija que pagas mensualmente.", "El límite de crédito asignado."], answer: "El porcentaje que se te cobra por usar crédito." },
+                { question: "¿Qué debes hacer si pierdes tu tarjeta de crédito?", options: ["Reportarla inmediatamente al banco.", "Esperar a que el banco te llame.", "Seguir usando la tarjeta de débito hasta encontrarla."], answer: "Reportarla inmediatamente al banco." }
+            ],
+            debito: [
+                { question: "¿Cómo afecta el uso de una tarjeta de débito a tu historial de crédito?", options: ["No afecta tu historial de crédito ya que solo usas tu propio dinero.", "Mejora tu puntaje de crédito si usas la tarjeta frecuentemente.", "Baja tu puntaje de crédito si no pagas a tiempo."], answer: "No afecta tu historial de crédito ya que solo usas tu propio dinero." },
+                { question: "¿Qué sucede si no tienes fondos suficientes en tu cuenta al usar una tarjeta de débito?", options: ["El banco rechazará la transacción.", "El banco te prestará dinero automáticamente.", "Podrás realizar la compra y pagar más tarde."], answer: "El banco rechazará la transacción." },
+                { question: "¿Cuáles son los beneficios de una tarjeta de débito frente a una de crédito?", options: ["No pagas intereses y solo gastas lo que tienes.", "Tienes un límite de crédito más alto.", "Generas historial crediticio más rápido."], answer: "No pagas intereses y solo gastas lo que tienes." },
+                { question: "¿Qué pasa si usas una tarjeta de débito en el extranjero?", options: ["Pueden aplicarse cargos adicionales por transacción internacional.", "No puedes usarla en el extranjero.", "No se aplican cargos adicionales."], answer: "Pueden aplicarse cargos adicionales por transacción internacional." },
+                { question: "¿Qué diferencia a una tarjeta de débito de una tarjeta prepagada?", options: ["La tarjeta de débito está vinculada a una cuenta bancaria.", "Ambas son iguales.", "La tarjeta prepagada no está vinculada a ninguna cuenta bancaria."], answer: "La tarjeta de débito está vinculada a una cuenta bancaria." }
+            ]
+        };
+
+        let currentQuiz;
+        let questionIndex = 0;
+        let correctAnswers = 0;
+
+        function startQuiz(type) {
+            currentQuiz = quizzes[type];
+            questionIndex = 0;
+            correctAnswers = 0;
+            document.getElementById('questionContainer').style.display = 'block';
+            showQuestion();
+        }
+
+        function showQuestion() {
+            if (questionIndex < currentQuiz.length) {
+                const question = currentQuiz[questionIndex];
+                document.getElementById('questionText').textContent = question.question;
+                const optionsContainer = document.getElementById('optionsContainer');
+                optionsContainer.innerHTML = '';
+                question.options.forEach(option => {
+                    const optionElement = document.createElement('div');
+                    optionElement.textContent = option;
+                    optionElement.className = 'option';
+                    optionElement.onclick = () => checkAnswer(option);
+                    optionsContainer.appendChild(optionElement);
+                });
+            } else {
+                alert(`Cuestionario finalizado. Has respondido correctamente ${correctAnswers} de ${currentQuiz.length} preguntas.`);
+                document.getElementById('questionContainer').style.display = 'none';
+            }
+        }
+
+        function checkAnswer(selectedOption) {
+            const correctAnswer = currentQuiz[questionIndex].answer;
+            if (selectedOption === correctAnswer) {
+                correctAnswers++;
+                launchConfetti();
+                alert("¡Respuesta Correcta! Cada respuesta correcta te lleva más cerca de ser un experto en finanzas.");
+            } else {
+                launchSadFaces();
+                alert("¡Respuesta Incorrecta! Entender las finanzas puede ser difícil al principio, pero estás más cerca de controlar tu futuro económico.");
+            }
+            questionIndex++;
+            showQuestion();
+        }
+
+        function launchConfetti() {
+            confetti({
+                particleCount: 200,
+                spread: 90,
+                startVelocity: 50,
+                origin: { y: 0.6 },
+                colors: ['#bb0000', '#ffffff', '#0000ff'],
+                shapes: ['square', 'circle']
+            });
+        }
+
+        function launchSadFaces() {
+            const sadFace = document.createElement('div');
+            sadFace.textContent = "😢";
+            sadFace.style.position = 'absolute';
+            sadFace.style.fontSize = '50px';
+            sadFace.style.top = Math.random() * window.innerHeight + 'px';
+            sadFace.style.left = Math.random() * window.innerWidth + 'px';
+            sadFace.style.transition = 'transform 4s ease';
+            sadFace.style.transform = 'translateY(100px)';
+            document.body.appendChild(sadFace);
+            setTimeout(() => sadFace.remove(), 4000); // Las caritas duran 4 segundos
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #d00000; /* Rojo Banorte */
+  color: #ffffff;
+  text-align: center;
+  padding: 20px 0;
+}
+
+header .logo {
+  width: 150px;
+  display: block;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin: 0.5em 0;
+}
+
+.container {
+  padding: 20px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2em;
+  color: #d00000; /* Rojo */
+  margin-bottom: 1em;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 1.5em;
+}
+
+a.button-image {
+  display: inline-block;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #000000; /* Negro */
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+}
+
+a.button-image img {
+  max-width: 100%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+a.button-image p {
+  font-size: 1.2em;
+}
+
+a.back-button {
+  display: inline-block;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #d00000; /* Rojo */
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+a.back-button:hover {
+  background-color: #a00000;
+}
+
+footer {
+  background-color: #000000; /* Negro */
+  color: #ffffff;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}

@@ -1,0 +1,6 @@
+<svg id="arbol" width="400" height="600">
+  <!-- Árbol del conocimiento -->
+  <g id="arbol-g">
+    <!-- Preguntas y respuestas se agregarán aquí -->
+  </g>
+</svg>

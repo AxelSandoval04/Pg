@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+
+    <!-- Aquí va el favicon -->
+    <link rel="icon" href="imagenes/icono.png" type="image/x-icon">
+
+    <title>Registro</title>
+    <style>
+        /* Estilos para ajustar el logo y el título en el header */
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Espacio entre el icono y el texto */
+        }
+
+        .logo {
+            width: 80px; /* Ajuste del tamaño del logo un poco más grande */
+        }
+
+        .logo-title h1 {
+            font-size: 2rem; /* Tamaño del texto ajustado */
+            margin: 0;
+        }
+
+        /* Estilos del patito caminando */
+        #contenedor-patito {
+            position: fixed;
+            bottom: 0;
+            left: -150px; /* Empieza fuera de la pantalla */
+            display: flex;
+            align-items: center;
+            animation: caminarBoomerang 20s ease-in-out infinite;
+        }
+
+        #patito {
+            width: 50px;
+        }
+
+        #etiqueta {
+            margin-left: 10px;
+            background-color: red;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        @keyframes caminarBoomerang {
+            0% { left: -150px; } /* Empieza fuera de la pantalla a la izquierda */
+            50% { left: calc(100% + 150px); } /* Se mueve más allá de la pantalla a la derecha */
+            100% { left: -150px; } /* Regresa al punto de partida fuera de la pantalla a la izquierda */
+        }
+    </style>
+</head>
+<header>
+    <div class="logo-title">
+        <img src="imagenes/icono.png" alt="Logo Banorte" class="logo"> <!-- Agregar aquí la ruta correcta del logo -->
+        <h1>Banorte</h1> 
+    </div>
+    
+    <nav>
+        <ul>
+            <!-- Aquí puedes añadir elementos de navegación si es necesario -->
+        </ul>
+    </nav>
+</header>
+<body>
+    <section>
+        <h2>Registrarse</h2>
+        <form id="signupForm">
+            <label>Nombre</label>
+            <input type="text" placeholder="..." id="name" required autofocus>
+            <label>Mail</label>
+            <input type="email" placeholder="..." id="email" required>
+            <label>Contraseña</label>
+            <input type="password" placeholder="..." id="password" required>
+            <input type="submit" value="Registro">
+        </form>
+        <p>Ya tienes una cuenta? <a href="login.html">Login</a></p>
+    </section>
+
+    <!-- Aquí va el patito con la etiqueta -->
+    <div id="contenedor-patito">
+        <img src="imagenes/nap.png" id="patito" alt="Patito caminando"> <!-- Reemplazar la ruta por la imagen correcta -->
+        <span id="etiqueta">¡Registrate con nosotros!</span>
+    </div>
+
+    <script src="signup.js"></script>
+</body>
+</html>

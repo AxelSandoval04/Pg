@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Créditos - Banorte</title>
+  <link rel="stylesheet" href="sty.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #d10000;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    header img {
+      width: 100px;
+      vertical-align: middle;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, p {
+      text-align: center;
+    }
+
+    .credit-options {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+    }
+
+    .credit-option {
+      background-color: #f7f7f7;
+      padding: 20px;
+      border: 1px solid #ddd;
+      text-align: center;
+      width: 30%;
+    }
+
+    .credit-option h3 {
+      margin-bottom: 10px;
+    }
+
+    .credit-option p {
+      margin-bottom: 15px;
+    }
+
+    .credit-option a {
+      text-decoration: none;
+      background-color: #d10000;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+
+    form {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input, select {
+      padding: 10px;
+      margin-bottom: 10px;
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .submit-btn {
+      background-color: #d10000;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin: 20px;
+      padding: 10px 20px;
+      background-color: #ddd;
+      text-decoration: none;
+      border-radius: 5px;
+      color: black;
+    }
+
+    footer {
+      background-color: #d10000;
+      color: white;
+      padding: 5px 0; /* Reducido para hacer más pequeño el pie de página */
+      text-align: center;
+      font-size: 0.8rem; /* Tamaño de fuente más pequeño */
+      position: relative; /* Evita superposición con contenido */
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="imagenes/banorte-logo.png" alt="Logo Banorte" class="logo">
+    <h1>Créditos Banorte</h1>
+  </header>
+
+  <div class="container">
+    <h2>Solicita un crédito personalizado</h2>
+    <p>Obtén el crédito que mejor se adapta a tus necesidades financieras.</p>
+
+    <!-- Formulario de solicitud de crédito -->
+    <form id="creditForm">
+      <label for="name">Nombre completo</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="creditType">Tipo de crédito</label>
+      <select id="creditType" name="creditType" required>
+        <option value="personal">Crédito Personal</option>
+        <option value="auto">Crédito Automotriz</option>
+        <option value="hipotecario">Crédito Hipotecario</option>
+      </select>
+
+      <label for="amount">Monto solicitado</label>
+      <input type="number" id="amount" name="amount" min="1000" max="1000000" required>
+
+      <input type="submit" value="Solicitar crédito" class="submit-btn">
+    </form>
+
+    <!-- Opciones de créditos disponibles -->
+    <div class="credit-options">
+      <div class="credit-option">
+        <h3>Crédito Personal</h3>
+        <p>Ideal para cumplir tus metas personales.</p>
+        <a href="#">Solicitar</a>
+      </div>
+      <div class="credit-option">
+        <h3>Crédito Automotriz</h3>
+        <p>Compra el auto de tus sueños con tasas preferenciales.</p>
+        <a href="#">Solicitar</a>
+      </div>
+      <div class="credit-option">
+        <h3>Crédito Hipotecario</h3>
+        <p>Adquiere tu casa con facilidades de pago.</p>
+        <a href="#">Solicitar</a>
+      </div>
+    </div>
+
+    <a href="index.html" class="back-button">Volver al Inicio</a>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Banorte. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    document.getElementById('creditForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const creditType = document.getElementById('creditType').value;
+      const amount = document.getElementById('amount').value;
+
+      if (!name || !email || !creditType || !amount) {
+        alert('Por favor, complete todos los campos.');
+        return;
+      }
+
+      alert(`Solicitud enviada con éxito:
+        Nombre: ${name}
+        Correo: ${email}
+        Tipo de crédito: ${creditType}
+        Monto: ${amount}`);
+
+      // Aquí puedes agregar la lógica para guardar los datos o enviarlos a un servidor
+    });
+  </script>
+</body>
+</html>
